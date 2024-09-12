@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+  sevenfood-postgres:
+    image: postgres:16.3-alpine
+    container_name: sevenfood-postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: Postgres2024!
+      POSTGRES_USER: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - postgres-network
+
+  sevenfood-pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: sevenfood-pgadmin
+    restart: always
+    depends_on:
+      - sevenfood-postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: infra@sevenfood.com.br
+      PGADMIN_DEFAULT_PASSWORD: PgAdmin2024!
+    ports:
+      - 16543:80
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - postgres-network
+
+networks:
+  postgres-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  pgadmin-data:
