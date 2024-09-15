@@ -7,7 +7,7 @@ spec:
   type: LoadBalancer
   ports:
     - protocol: "TCP"
-      port: 9914
-      targetPort: 9914
+      port: 9924
+      targetPort: 9924
   selector:
     app: selectgearmotors-company-api
