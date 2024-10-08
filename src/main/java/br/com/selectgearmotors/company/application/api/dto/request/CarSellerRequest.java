@@ -91,7 +91,7 @@ public class CarSellerRequest implements Serializable {
 
     @Schema(description = "Client of the User.",
             example = "1", ref = "ClientCategoryEntity")
-    private Long companyId;
+    private String companyId;
 
     @Schema(description = "Client of the User.",
             example = "1", ref = "ClientCategoryEntity")
