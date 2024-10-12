@@ -12,9 +12,9 @@ docker rmi $(docker images -qa) -f
 ./mvnw clean install test jacoco:report
 sudo sysctl -w vm.max_map_count=262144
 
-docker build -t rogeriofontes/selectgearmotors-company-api:v3 .
+docker build -t rogeriofontes/selectgearmotors-company-api:v4 .
 docker login
-docker push rogeriofontes/selectgearmotors-company-api:v3
+docker push rogeriofontes/selectgearmotors-company-api:v4
 
 docker pull rogeriofontes/selectgearmotors-company-api:v3
 docker run -p 9914:9914 -e  rogeriofontes/selectgearmotors-company-api:v3
