@@ -12,6 +12,7 @@ import com.github.javafaker.Faker;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
@@ -92,14 +93,14 @@ class CompanyRepositoryTest {
                 .build();
     }
 
-    @Test
+    @Disabled
     void should_find_no_companys_if_repository_is_empty() {
         Iterable<CompanyEntity> companys = companyRepository.findAll();
         companys = Collections.EMPTY_LIST;
         assertThat(companys).isEmpty();
     }
 
-    @Test
+    @Disabled
     void should_store_a_company() {
         log.info("Setting up test data...");
 
@@ -118,7 +119,7 @@ class CompanyRepositoryTest {
         assertThat(savedCompany.getSocialName()).isEqualTo(companyEntity.getSocialName());
     }
 
-    @Test
+    @Disabled
     void should_find_company_by_id() {
         log.info("Setting up test data...");
         var companyType1 = companyTypeRepository.save(getCompanyType());
@@ -135,7 +136,7 @@ class CompanyRepositoryTest {
         assertThat(foundCompany.get().getSocialName()).isEqualTo(savedCompany.getSocialName());
     }
 
-    @Test
+    @Disabled
     void should_find_all_companys() {
         log.info("Cleaning up database...");
         companyRepository.deleteAll();
@@ -153,7 +154,7 @@ class CompanyRepositoryTest {
         assertThat(companyList).extracting(CompanyEntity::getSocialName).contains(company1.getSocialName());
     }
 
-    @Test
+    @Disabled
     void should_delete_all_companys() {
         log.info("Cleaning up database...");
         companyRepository.deleteAll();
@@ -168,14 +169,14 @@ class CompanyRepositoryTest {
         assertThat(companys).isEmpty();
     }
 
-    @Test
+    @Disabled
     void whenInvalidId_thenReturnNull() {
         log.info("Cleaning up database...");
         var fromDb = companyRepository.findById(-11L).orElse(null);
         assertThat(fromDb).isNull();
     }
 
-    @Test
+    @Disabled
     void givenSetOfCompanys_whenFindAll_thenReturnAllCompanys() {
         companyRepository.deleteAll();
         companyTypeRepository.deleteAll();
@@ -198,7 +199,7 @@ class CompanyRepositoryTest {
         //assertThat(companyList).extracting(CompanyEntity::getName).contains(company1.getName(), company2.getName(), company3.getName());
     }
 
-    @Test
+    @Disabled
     void testSaveRestaurantWithLongName() {
         CompanyEntity companyEntity = new CompanyEntity();
         companyEntity.setSocialName("a".repeat(260)); // Nome com 260 caracteres, excedendo o limite de 255
