@@ -24,8 +24,8 @@ public class SecurityConfig {
                         authorizeRequests
                                 .requestMatchers("/swagger-ui/**").permitAll()
                                 .requestMatchers("/v3/api-docs/**").permitAll()
-                                .requestMatchers("/actuator/health").permitAll()
-                                .anyRequest().authenticated() // Todas as requisições precisam estar autenticadas
+                                .requestMatchers("/api/actuator/health").permitAll() // Permitir acesso sem autenticação
+                                .anyRequest().authenticated() // Todas as outras requisições precisam de autenticação
                 )
                 .oauth2ResourceServer(oauth2 ->
                         oauth2.jwt(jwtConfigurer -> {
