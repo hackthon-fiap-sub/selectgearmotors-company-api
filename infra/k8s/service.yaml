@@ -6,6 +6,10 @@ metadata:
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: "nlb" # Para Network Load Balancer (opcional)
     # service.beta.kubernetes.io/aws-load-balancer-internal: "true" # Para um Load Balancer interno (opcional)
+    aws.servicediscovery.endpoint: "enabled"
+    cloudmap.amazonaws.com/namespace: "selectgearmotors.local" # Namespace no AWS Cloud Map
+    cloudmap.amazonaws.com/service: "api-client"       # Nome do serviço no Cloud Map
+    cloudmap.amazonaws.com/enable: "true"             # Habilitar registro no Cloud Map
 spec:
   type: LoadBalancer
   ports:
