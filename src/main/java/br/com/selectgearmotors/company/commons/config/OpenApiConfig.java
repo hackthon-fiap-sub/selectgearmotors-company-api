@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
         info = @Info(
                 contact = @Contact(
                         name = "Selectgearmotors Company API",
-                        email = "contact@sevenfood.com.br",
+                        email = "contact@selectgearmotors.com.br",
                         url = "https://selectgearmotors.com.br"
                 ),
                 description = "OpenApi documentation for Spring Security",
