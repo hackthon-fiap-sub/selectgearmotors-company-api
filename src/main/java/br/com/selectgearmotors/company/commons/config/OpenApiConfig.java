@@ -14,12 +14,12 @@ import org.springframework.beans.factory.annotation.Value;
 @OpenAPIDefinition(
         info = @Info(
                 contact = @Contact(
-                        name = "Sevenfood Client API",
+                        name = "Selectgearmotors Company API",
                         email = "contact@sevenfood.com.br",
-                        url = "https://mentor.com.br"
+                        url = "https://selectgearmotors.com.br"
                 ),
                 description = "OpenApi documentation for Spring Security",
-                title = "OpenApi specification - Mentor API",
+                title = "OpenApi specification - Selectgearmotors API",
                 version = "1.0",
                 license = @License(
                         name = "Licence name",
