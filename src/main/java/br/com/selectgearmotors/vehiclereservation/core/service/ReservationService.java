@@ -2,6 +2,7 @@ package br.com.selectgearmotors.vehiclereservation.core.service;
 
 import br.com.selectgearmotors.vehiclereservation.application.api.exception.ResourceFoundException;
 import br.com.selectgearmotors.vehiclereservation.core.domain.Reservation;
+import br.com.selectgearmotors.vehiclereservation.core.domain.StatusReservation;
 import br.com.selectgearmotors.vehiclereservation.core.ports.in.reservation.*;
 import br.com.selectgearmotors.vehiclereservation.core.ports.out.ReservationRepositoryPort;
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +42,27 @@ public class ReservationService implements CreateReservationPort, UpdateReservat
         }
         return null;
     }
+
+    @Override
+    public Reservation updateDone(Long id) {
+        Reservation resultById = findById(id);
+        if (resultById != null) {
+            resultById.setStatusReservation(StatusReservation.SOLD);
+            return reservationRepositoryPort.save(resultById);
+        }
+        return null;
+    }
+
+    @Override
+    public Reservation updateCancelled(Long id) {
+        Reservation resultById = findById(id);
+        if (resultById != null) {
+            resultById.setStatusReservation(StatusReservation.CANCELLED);
+            return reservationRepositoryPort.save(resultById);
+        }
+        return null;
+    }
+
 
     @Override
     public Reservation findById(Long id) {

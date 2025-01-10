@@ -112,6 +112,11 @@ management:
 #        expiration: 6048000000 # 70 days
 #cognito:
 #  user-pool-id: us-east-1_lLiNIC87U
+gateway:
+  client:
+    url: ${API_GATEWAY_CLIENT_URL}
+  vehicle:
+    url: ${API_GATEWAY_VEHICLE_URL}
 ---
 spring:
   application:
@@ -214,3 +219,8 @@ management:
 #        expiration: 6048000000 # 70 days
 #cognito:
 #  user-pool-id: us-east-1_lLiNIC87U
+gateway:
+  client:
+    url: ${API_GATEWAY_CLIENT_URL}
+  vehicle:
+    url: ${API_GATEWAY_VEHICLE_URL}

@@ -108,6 +108,50 @@ public class RegistrationResources {
         }
     }
 
+    @Operation(summary = "Update a Reservation by Id", tags = {"productCategorys", "put"})
+    @ApiResponse(responseCode = "200", content = {
+            @Content(schema = @Schema(implementation = RegistrationResources.class), mediaType = "application/json")})
+    @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})
+    @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
+    @PutMapping("/{id}/sold")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<ReservationResponse> updateDone(@PathVariable("id") Long id) {
+        try {
+            Reservation updated = updateReservationPort.updateDone(id);
+            if (updated == null) {
+                throw new ResourceFoundException("\"Produto não encontroado ao atualizar");
+            }
+
+            ReservationResponse reservationResponse = reservationApiMapper.fromEntity(updated);
+            return ResponseEntity.ok(reservationResponse);
+        } catch (Exception ex) {
+            log.error(Constants.ERROR_EXCEPTION_RESOURCE + "-update: {}", ex.getMessage());
+            return ResponseEntity.ok().build();
+        }
+    }
+
+    @Operation(summary = "Update a Reservation by Id", tags = {"productCategorys", "put"})
+    @ApiResponse(responseCode = "200", content = {
+            @Content(schema = @Schema(implementation = RegistrationResources.class), mediaType = "application/json")})
+    @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})
+    @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
+    @PutMapping("/{id}/cancelled")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<ReservationResponse> updateCancelled(@PathVariable("id") Long id) {
+        try {
+            Reservation updated = updateReservationPort.updateCancelled(id);
+            if (updated == null) {
+                throw new ResourceFoundException("\"Produto não encontroado ao atualizar");
+            }
+
+            ReservationResponse reservationResponse = reservationApiMapper.fromEntity(updated);
+            return ResponseEntity.ok(reservationResponse);
+        } catch (Exception ex) {
+            log.error(Constants.ERROR_EXCEPTION_RESOURCE + "-update: {}", ex.getMessage());
+            return ResponseEntity.ok().build();
+        }
+    }
+
     @Operation(summary = "Retrieve all Reservation", tags = {"productCategorys", "get", "filter"})
     @ApiResponse(responseCode = "200", content = {
             @Content(schema = @Schema(implementation = RegistrationResources.class), mediaType = "application/json")})
