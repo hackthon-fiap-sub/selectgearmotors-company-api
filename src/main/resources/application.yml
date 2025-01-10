@@ -1,5 +1,5 @@
 server:
-  port: 9944
+  port: 9954
   servlet:
     context-path: /api
   error:

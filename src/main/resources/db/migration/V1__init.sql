@@ -1,3 +1,3 @@
 --CREATE SCHEMA selectgearmotors;
-DROP SCHEMA IF EXISTS company;
-CREATE SCHEMA company;
+DROP SCHEMA IF EXISTS vehiclereservation;
+CREATE SCHEMA vehiclereservation;

@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.selectgearmotors.company</groupId>
-    <artifactId>selectgearmotors-company-api</artifactId>
+    <artifactId>selectgearmotors-vehicle-reservation-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>selectgearmotors-company-api</name>
     <description>Demo project for Spring Boot</description>
@@ -215,6 +215,10 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
         <dependency>
@@ -319,15 +323,21 @@
                         </goals>
                     </execution>
                     <execution>
+                        <id>jacoco-report-verify</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
                         <id>jacoco-site</id>
                         <phase>package</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
                     </execution>
-                    <!-- attached to Maven test phase -->
                     <execution>
-                        <id>report</id>
+                        <id>jacoco-report-test</id>
                         <phase>test</phase>
                         <goals>
                             <goal>report</goal>
