@@ -3,8 +3,11 @@ package br.com.selectgearmotors.vehiclereservation.application.database.reposito
 import br.com.selectgearmotors.vehiclereservation.application.api.exception.ResourceFoundException;
 import br.com.selectgearmotors.vehiclereservation.application.api.exception.ResourceNotRemoveException;
 import br.com.selectgearmotors.vehiclereservation.application.database.mapper.ReservationMapper;
+import br.com.selectgearmotors.vehiclereservation.application.service.ValidationReservationAdapter;
 import br.com.selectgearmotors.vehiclereservation.core.domain.Reservation;
 import br.com.selectgearmotors.vehiclereservation.core.ports.out.ReservationRepositoryPort;
+import br.com.selectgearmotors.vehiclereservation.gateway.dto.VehicleResponseDTO;
+import br.com.selectgearmotors.vehiclereservation.gateway.vehicle.VehicleWebClient;
 import br.com.selectgearmotors.vehiclereservation.infrastructure.entity.reservation.ReservationEntity;
 import br.com.selectgearmotors.vehiclereservation.infrastructure.repository.ReservationRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -21,11 +24,13 @@ public class ReservationRepositoryAdapter implements ReservationRepositoryPort {
 
     private final ReservationRepository reservationRepository;
     private final ReservationMapper reservationMapper;
+    private final ValidationReservationAdapter validationReservationAdapter;
 
     @Autowired
-    public ReservationRepositoryAdapter(ReservationRepository reservationRepository, ReservationMapper reservationMapper) {
+    public ReservationRepositoryAdapter(ReservationRepository reservationRepository, ReservationMapper reservationMapper, ValidationReservationAdapter validationReservationAdapter) {
         this.reservationRepository = reservationRepository;
         this.reservationMapper = reservationMapper;
+        this.validationReservationAdapter = validationReservationAdapter;
     }
 
     @Override
@@ -43,6 +48,9 @@ public class ReservationRepositoryAdapter implements ReservationRepositoryPort {
 
             ReservationEntity saved = reservationRepository.save(reservationEntity);
             validateSavedEntity(saved);
+
+            //Ao reservar um veículo, o status do veículo deve ser atualizado para reservado
+            validationReservationAdapter.setStatus(reservation.getVehicleId());
             return reservationMapper.fromEntityToModel(saved);
         } catch (ResourceFoundException e) {
             log.error("Erro ao salvar produto: {}", e.getMessage());

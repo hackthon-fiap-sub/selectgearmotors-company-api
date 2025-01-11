@@ -10,10 +10,6 @@ import br.com.selectgearmotors.vehiclereservation.commons.Constants;
 import br.com.selectgearmotors.vehiclereservation.commons.util.RestUtils;
 import br.com.selectgearmotors.vehiclereservation.core.domain.Reservation;
 import br.com.selectgearmotors.vehiclereservation.core.ports.in.reservation.*;
-import br.com.selectgearmotors.vehiclereservation.gateway.client.ClientWebClient;
-import br.com.selectgearmotors.vehiclereservation.gateway.dto.ClientResponseDTO;
-import br.com.selectgearmotors.vehiclereservation.gateway.dto.VehicleResponseDTO;
-import br.com.selectgearmotors.vehiclereservation.gateway.vehicle.VehicleWebClient;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -31,9 +27,9 @@ import java.util.UUID;
 
 @Slf4j
 @RestController
-@RequestMapping("/v1/registrations")
+@RequestMapping("/v1/reservations")
 @CrossOrigin(origins = "*", allowedHeaders = "Content-Physical, Authorization", maxAge = 3600)
-public class RegistrationResources {
+public class ReservationResources {
 
     private final CreateReservationPort createReservationPort;
     private final DeleteReservationPort deleteReservationPort;
@@ -44,7 +40,7 @@ public class RegistrationResources {
     private final ValidationReservationAdapter validationReservationAdapter;
 
     @Autowired
-    public RegistrationResources(CreateReservationPort createReservationPort, DeleteReservationPort deleteReservationPort, FindByIdReservationPort findByIdReservationPort, FindReservationsPort findProductCategoriesPort, UpdateReservationPort updateReservationPort, ReservationApiMapper reservationApiMapper, ValidationReservationAdapter validationReservationAdapter) {
+    public ReservationResources(CreateReservationPort createReservationPort, DeleteReservationPort deleteReservationPort, FindByIdReservationPort findByIdReservationPort, FindReservationsPort findProductCategoriesPort, UpdateReservationPort updateReservationPort, ReservationApiMapper reservationApiMapper, ValidationReservationAdapter validationReservationAdapter) {
         this.createReservationPort = createReservationPort;
         this.deleteReservationPort = deleteReservationPort;
         this.findByIdReservationPort = findByIdReservationPort;
@@ -56,7 +52,7 @@ public class RegistrationResources {
 
     @Operation(summary = "Create a new Reservation", tags = {"productCategorys", "post"})
     @ApiResponse(responseCode = "201", content = {
-            @Content(schema = @Schema(implementation = RegistrationResources.class), mediaType = "application/json")})
+            @Content(schema = @Schema(implementation = ReservationResources.class), mediaType = "application/json")})
     @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -86,7 +82,7 @@ public class RegistrationResources {
 
     @Operation(summary = "Update a Reservation by Id", tags = {"productCategorys", "put"})
     @ApiResponse(responseCode = "200", content = {
-            @Content(schema = @Schema(implementation = RegistrationResources.class), mediaType = "application/json")})
+            @Content(schema = @Schema(implementation = ReservationResources.class), mediaType = "application/json")})
     @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})
     @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
     @PutMapping("/{id}")
@@ -110,7 +106,7 @@ public class RegistrationResources {
 
     @Operation(summary = "Update a Reservation by Id", tags = {"productCategorys", "put"})
     @ApiResponse(responseCode = "200", content = {
-            @Content(schema = @Schema(implementation = RegistrationResources.class), mediaType = "application/json")})
+            @Content(schema = @Schema(implementation = ReservationResources.class), mediaType = "application/json")})
     @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})
     @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
     @PutMapping("/{id}/sold")
@@ -132,7 +128,7 @@ public class RegistrationResources {
 
     @Operation(summary = "Update a Reservation by Id", tags = {"productCategorys", "put"})
     @ApiResponse(responseCode = "200", content = {
-            @Content(schema = @Schema(implementation = RegistrationResources.class), mediaType = "application/json")})
+            @Content(schema = @Schema(implementation = ReservationResources.class), mediaType = "application/json")})
     @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})
     @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
     @PutMapping("/{id}/cancelled")
@@ -154,7 +150,7 @@ public class RegistrationResources {
 
     @Operation(summary = "Retrieve all Reservation", tags = {"productCategorys", "get", "filter"})
     @ApiResponse(responseCode = "200", content = {
-            @Content(schema = @Schema(implementation = RegistrationResources.class), mediaType = "application/json")})
+            @Content(schema = @Schema(implementation = ReservationResources.class), mediaType = "application/json")})
     @ApiResponse(responseCode = "204", description = "There are no Associations", content = {
             @Content(schema = @Schema())})
     @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})
@@ -172,7 +168,7 @@ public class RegistrationResources {
             summary = "Retrieve a Reservation by Id",
             description = "Get a Reservation object by specifying its id. The response is Association object with id, title, description and published status.",
             tags = {"productCategorys", "get"})
-    @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = RegistrationResources.class), mediaType = "application/json")})
+    @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = ReservationResources.class), mediaType = "application/json")})
     @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
     @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})
     @GetMapping("/{id}")
@@ -197,7 +193,7 @@ public class RegistrationResources {
             summary = "Retrieve a Reservation by Id",
             description = "Get a Reservation object by specifying its id. The response is Association object with id, title, description and published status.",
             tags = {"productCategorys", "get"})
-    @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = RegistrationResources.class), mediaType = "application/json")})
+    @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = ReservationResources.class), mediaType = "application/json")})
     @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
     @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})
     @GetMapping("/vehicle/{id}")
@@ -222,7 +218,7 @@ public class RegistrationResources {
             summary = "Retrieve a Reservation by Id",
             description = "Get a Reservation object by specifying its id. The response is Association object with id, title, description and published status.",
             tags = {"productCategorys", "get"})
-    @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = RegistrationResources.class), mediaType = "application/json")})
+    @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = ReservationResources.class), mediaType = "application/json")})
     @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
     @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})
     @GetMapping("/buyer/{id}")

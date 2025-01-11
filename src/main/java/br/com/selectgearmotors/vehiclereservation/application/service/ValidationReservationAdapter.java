@@ -39,4 +39,13 @@ public class ValidationReservationAdapter {
         log.info("Validating reservation for client {} and vehicle {}", clientCode, vehicleCode);
         return true;
     }
+
+    public void setStatus(UUID vehicleId) {
+        VehicleResponseDTO vehicleResponseDTO = getStatus(vehicleId);
+        vehicleWebClient.setStatus(vehicleResponseDTO.getCode());
+    }
+
+    public VehicleResponseDTO getStatus(UUID vehicleId) {
+        return vehicleWebClient.get(vehicleId);
+    }
 }

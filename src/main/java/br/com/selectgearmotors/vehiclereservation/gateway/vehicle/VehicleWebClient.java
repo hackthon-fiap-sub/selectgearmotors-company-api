@@ -42,6 +42,18 @@ public class VehicleWebClient {
                 .block();
     }
 
+    public void setStatus(String code) {
+        // Pega o token armazenado no filtro
+        String bearerToken = (String) request.getAttribute(Constants.BEARER_TOKEN_ATTRIBUTE);
+
+        webClient.put()
+                .uri("/vehicles/{code}/reserved", code)
+                .headers(headers -> headers.setBearerAuth(bearerToken))
+                .retrieve()
+                .bodyToMono(Void.class)
+                .block();
+    }
+
     public String getBaseUrl() {
         return baseUrl;
     }
